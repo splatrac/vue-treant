@@ -28,39 +28,13 @@
     }
 </script>
 <style scoped>
-.container {
-    align-content: center;
-}
 
 .ptree li {
   list-style-type: none;
 }
 
-.ptree li div {
-  display: flex;
-  list-style-type: none;
-  margin: 2px;
-  border-radius: 5px;
-  padding: 2px;
-  align-items: center;
-  min-height: 30px;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(20px);
-  -ms-transform: translateX(20px);
-  transform: translateX(20px);
-}
-
-.ptree_order_div {
-  /* height: 20px !important; */
-}
-.ptree_order_div i {
-  /* margin: 5px !important; */
-}
-
 .ptree .menuIcon {
-  margin-left: auto;
+  /* margin-left: auto; */
   color: black;
 }
 
@@ -72,30 +46,14 @@ input:checked + .slider:before {
   pointer-events: none;
 }
 
-.ptree .drag_triggered {
-  border: 2px solid red;
-}
-
 .ptree {
-  /* border: 2px solid darkgrey; */
-  border-radius: 5px;
   height: 100%;
-  overflow-y: auto;
-  /* padding-right: 15px; */
 }
 
-.ptree .valid {
-  border: 2px solid green;
-  border-radius: 5px;
-}
-
-.ptree .invalid {
-  border: 2px solid #ef5350;
-  border-radius: 5px;
-}
 .disabled > * {
   pointer-events: none;
 }
+
 .ptreemenuCont i {
   pointer-events: none;
 }
@@ -106,11 +64,10 @@ input:checked + .slider:before {
   overflow: hidden;
 }
 
-.ptree ul.active {
-  /* max-height: 500px; */
-  transition: max-height 0.15s ease-in;
+.dragging-element li { 
+    border: 0px !important;
 }
-.dragging-element li{ border: 0px !important;}
+
 .ptree::-webkit-scrollbar { width: 2px !important;}
 .ptree::-webkit-scrollbar-track { background: whitesmoke !important;}
 .ptree::-webkit-scrollbar-thumb { background: grey !important; }

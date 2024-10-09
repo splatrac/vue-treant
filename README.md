@@ -42,4 +42,20 @@ const treeData = reactive([{
 ```
 ## Customizing Nodes
 
-Use slots to customize the appearance of the nodes. 
+
+## Events
+
+### expanded Event
+
+*   **Event Name:** `expanded`
+*   **Description:** Emitted when the expand/collapse control is clicked.
+*   **Payload:** None
+*   **Example:** Coming soon
+
+### activated Event
+
+*   **Event Name:** `activated`
+*   **Description:** Emitted when the node check control is toggled.
+*   **Payload:** None
+*   **Example:** Coming soon
+
