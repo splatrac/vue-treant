@@ -2,12 +2,12 @@
   "name": "vue-treant",
   "version": "0.1.1",
   "description": "A Vue entity tree module",
-  "author": "Craftrac",
+  "author": "Splatrac",
   "license": "MIT",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/craftrac/vue-treant.git"
+    "url": "git+https://github.com/splatrac/vue-treant.git"
   },
   "main": "dist/vue-treant.cjs.js",
   "module": "./dist/vue-treant.umd.cjs",
