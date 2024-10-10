@@ -15,11 +15,11 @@ const isExpanded = ref(false)
 const isActive = ref(false)
 const expand = () => {
     isExpanded.value = !isExpanded.value
-    emit('expanded', isExpanded)
+    emit('expanded', isExpanded.value)
 }
 
 const activate = () => {
-    emit('activated', isActive)
+    emit('activated', isActive.value)
 }
 
 </script>
