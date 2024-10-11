@@ -5,35 +5,37 @@ import IconPlus from './icons/IconPlus.vue'
 import IconMinus from './icons/IconMinus.vue'
 import IconMore from './icons/IconMore.vue'
 
-const props = defineProps({
-    children: Array<Node>,
-    hasChildren: Boolean,
-})
+const props = defineProps<{
+    children?: Node[],
+    hasChildren?: boolean,
+    active?: boolean,
+    expanded?: boolean
+}>()
 
-const emit = defineEmits(['onExpand', 'onActivate'])
-const isExpanded = ref(false)
-const isActive = ref(false)
+const active = ref(props.active) || ref(false)
+const expanded = ref(props.expanded) || ref(false)
+const emit = defineEmits(['expand', 'activate'])
 const expand = () => {
-    isExpanded.value = !isExpanded.value
-    emit('onExpand', isExpanded.value)
+    expanded.value = !expanded.value
+    emit('expand', expanded.value)
 }
 
 const activate = () => {
-    emit('onActivate', isActive.value)
+    emit('activate', active.value)
 }
 </script>
 
 <template>
     <div class="node">
         <a @click.prevent="expand" v-if="props.hasChildren" class="fold-control node-control">
-            <IconPlus v-show="!isExpanded" />
-            <IconMinus v-show="isExpanded" />
+            <IconPlus v-show="!expanded" />
+            <IconMinus v-show="expanded" />
         </a>
         <span class="title">
             <slot name="title"></slot>
         </span>
         <label class="switch">
-            <input type="checkbox" v-model="isActive" @change="activate" value="1">
+            <input type="checkbox" v-model="active" @change="activate" value="1">
             <span class="slider round"></span>
         </label>
         <a class="context-menu node-control">
