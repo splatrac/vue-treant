@@ -2,8 +2,7 @@
     <ul id="treemain" class="ptree">
         <template v-for="node in treeNodes" :key="node.title">
             <li class="container">
-                <TreeNode :hasChildren="Object.hasOwn(node, 'children')" @expand="expandNode(node)"
-                    @activate="activateNode(node)">
+                <TreeNode :id="node.id" :hasChildren="Object.hasOwn(node, 'children')" @expand="expandNode(node)">
                     <template #title>
                         {{ node.title }}
                     </template>
@@ -24,9 +23,7 @@ const treeNodes = reactive(props.data)
 const expandNode = (node: Node) => {
     node.expanded = !node.expanded
 }
-const activateNode = (node: Node) => {
-    node.active = !node.active
-}
+
 </script>
 <style scoped>
 .ptree li {
@@ -34,7 +31,6 @@ const activateNode = (node: Node) => {
 }
 
 .ptree .menuIcon {
-    /* margin-left: auto; */
     color: black;
 }
 

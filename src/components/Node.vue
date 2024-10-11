@@ -5,23 +5,27 @@ import IconPlus from './icons/IconPlus.vue'
 import IconMinus from './icons/IconMinus.vue'
 import IconMore from './icons/IconMore.vue'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
+    id: string,
     children?: Node[],
     hasChildren?: boolean,
-    active?: boolean,
-    expanded?: boolean
-}>()
+    active: boolean,
+    expanded: boolean
+}>(), {
+    active: false,
+    expanded: false
+})
 
-const active = ref(props.active) || ref(false)
-const expanded = ref(props.expanded) || ref(false)
+const active = ref(props.active)
+const expanded = ref(props.expanded)
 const emit = defineEmits(['expand', 'activate'])
 const expand = () => {
     expanded.value = !expanded.value
-    emit('expand', expanded.value)
+    emit('expand', props.id, expanded.value)
 }
 
 const activate = () => {
-    emit('activate', active.value)
+    emit('activate', props.id, active.value)
 }
 </script>
 

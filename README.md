@@ -27,13 +27,30 @@ Import and Register the Component
 import { ref } from 'vue';
 import VueTreant from 'vue-treant';
 
-const treeData = reactive([{
-  title: 'Root Node',
-  children: [
-    { title: 'Child Node 1', children: [{ title: 'Grandchild Node 1' }] },
-    { title: 'Child Node 2' }
-  ]
-}]);
+const treeData: Node[] = [{
+    title: 'Root',
+    id: 'root',
+    children: [
+        {
+            title: 'Node 1',
+            id: 'node_1',
+            children: [
+                { title: 'Node 1.1', id: 'node_1_1' },
+                { title: 'Node 1.2', id: 'node_1_2', children: [{ title: 'Node 1.2.1', id: 'node_1_2_1' }] },
+            ]
+        },
+        {
+            title: 'Node 2',
+            id: 'node_2',
+            children: [
+                { title: 'Node 2.1', id: 'node_2_1' },
+                { title: 'Node 2.2', id: 'node_2_2' }
+            ]
+        }
+    ]
+},
+{ title: 'Other', id: 'other' }
+]
 </script>
 
 <template>
