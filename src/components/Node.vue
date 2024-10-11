@@ -10,18 +10,17 @@ const props = defineProps({
     hasChildren: Boolean,
 })
 
-const emit = defineEmits(['expanded', 'activated'])
+const emit = defineEmits(['onExpand', 'onActivate'])
 const isExpanded = ref(false)
 const isActive = ref(false)
 const expand = () => {
     isExpanded.value = !isExpanded.value
-    emit('expanded', isExpanded.value)
+    emit('onExpand', isExpanded.value)
 }
 
 const activate = () => {
-    emit('activated', isActive.value)
+    emit('onActivate', isActive.value)
 }
-
 </script>
 
 <template>

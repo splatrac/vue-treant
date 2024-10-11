@@ -2,8 +2,8 @@
     <ul id="treemain" class="ptree">
         <template v-for="node in treeNodes" :key="node.title">
             <li class="container">
-                <TreeNode :hasChildren="Object.hasOwn(node, 'children')" @expanded="expandNode(node)"
-                    @activated="activateNode(node)">
+                <TreeNode :hasChildren="Object.hasOwn(node, 'children')" @on-expand="expandNode(node)"
+                    @on-activate="activateNode(node)">
                     <template #title>
                         {{ node.title }}
                     </template>
