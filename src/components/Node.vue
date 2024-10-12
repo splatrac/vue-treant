@@ -4,14 +4,16 @@ import { Node } from '../types'
 import IconPlus from './icons/IconPlus.vue'
 import IconMinus from './icons/IconMinus.vue'
 import IconMore from './icons/IconMore.vue'
+import { uuid } from 'vue-uuid'
 
 const props = withDefaults(defineProps<{
-    id: string,
+    id?: string,
     children?: Node[],
     hasChildren?: boolean,
     active: boolean,
     expanded: boolean
 }>(), {
+    id: uuid.v1(),
     active: false,
     expanded: false
 })

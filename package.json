@@ -17,7 +17,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vue-tsc && rm --rf dist/vite.config.ts.timestamp-* && vite build",
     "preview": "vite preview"
   },
   "files": [
@@ -26,7 +26,8 @@
   ],
   "dependencies": {
     "oh-vue-icons": "^1.0.0-rc3",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vue-uuid": "^3.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

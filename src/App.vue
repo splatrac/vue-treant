@@ -19,8 +19,8 @@ const data: Node[] = [{
             title: 'Node 2',
             id: 'node_2',
             children: [
-                { title: 'Node 2.1', id: 'node_2_1' },
-                { title: 'Node 2.2', id: 'node_2_2' }
+                { title: 'Node 2.1' },
+                { title: 'Node 2.2' }
             ]
         }
     ]
