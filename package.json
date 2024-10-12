@@ -1,6 +1,6 @@
 {
   "name": "vue-treant",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "A Vue entity tree module",
   "author": "Splatrac",
   "license": "MIT",
@@ -17,7 +17,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && rm --rf dist/vite.config.ts.timestamp-* && vite build",
+    "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
   "files": [
