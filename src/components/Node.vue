@@ -1,47 +1,31 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Node } from '../types'
-import IconPlus from './icons/IconPlus.vue'
-import IconMinus from './icons/IconMinus.vue'
-import IconMore from './icons/IconMore.vue'
+import { ref, inject } from 'vue'
+// import { Node } from '../types'
 import { uuid } from 'vue-uuid'
+import IconMore from './icons/IconMore.vue';
+import { ActivateNode } from '../types';
 
 const props = withDefaults(defineProps<{
     id?: string,
-    children?: Node[],
-    hasChildren?: boolean,
-    active: boolean,
-    expanded: boolean
+    active?: boolean,
 }>(), {
     id: uuid.v1(),
     active: false,
-    expanded: false
 })
 
 const active = ref(props.active)
-const expanded = ref(props.expanded)
-const emit = defineEmits(['expand', 'activate'])
-const expand = () => {
-    expanded.value = !expanded.value
-    emit('expand', props.id, expanded.value)
-}
-
-const activate = () => {
-    emit('activate', props.id, active.value)
-}
+const emit = defineEmits(['activate'])
+const activateNode = inject<ActivateNode>('activateNode')!
 </script>
 
 <template>
     <div class="node">
-        <a @click.prevent="expand" v-if="props.hasChildren" class="fold-control node-control">
-            <IconPlus v-show="!expanded" />
-            <IconMinus v-show="expanded" />
-        </a>
+        <slot name="left-control" class="fold-control node-control"></slot>
         <span class="title">
             <slot name="title"></slot>
         </span>
         <label class="switch">
-            <input type="checkbox" v-model="active" @change="activate" value="1">
+            <input type="checkbox" v-model="active" @change="activateNode(props.id, active)" value="1">
             <span class="slider round"></span>
         </label>
         <a class="context-menu node-control">
@@ -49,6 +33,7 @@ const activate = () => {
         </a>
     </div>
 </template>
+
 <style scoped>
 .node {
     background-color: white;
@@ -65,10 +50,6 @@ const activate = () => {
     text-align: left;
 }
 
-.fold-control {
-    margin: auto 0 0px 6px;
-    cursor: pointer;
-}
 
 .context-menu {
     line-height: 0;
@@ -139,5 +120,10 @@ input:checked+.slider:before {
     font-size: 14px;
     font-family: monospace, "Open Sans";
     text-decoration: none;
+}
+
+.fold-control {
+    margin: auto 0 0px 6px;
+    cursor: pointer;
 }
 </style>

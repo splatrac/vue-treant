@@ -5,3 +5,8 @@ export interface Node {
     expanded?: boolean;
     active?: boolean;
 }
+
+export type ExpandNode = (_id: string) => void;
+export type ActivateNode = (id: string, active: boolean) => void;
+
+

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Tree from './components/Tree.vue'
+import VueTreant from './components/TreeWrapper.vue'
 import { Node } from './types'
 
 
-const data: Node[] = [{
+const treeData: Node[] = [{
     title: 'Root',
     id: 'root',
     children: [
@@ -27,11 +27,22 @@ const data: Node[] = [{
 },
 { title: 'Other', id: 'other' }
 ]
+
+
+const handleExpand = (id: string, isExpanded: boolean) => {
+    // TODO: Goal is to print successfuly for every node
+    console.debug(`Node '${id}' expanded = ${isExpanded}`)
+}
+
+const handleActivate = (id: string, isActive: boolean) => {
+    // TODO: Goal is to print successfuly for every node
+    console.debug(`Node '${id}' activated = ${isActive}`)
+}
 </script>
 
 <template>
     <h1>Vue Treant</h1>
-    <Tree ref="vueTreant" :data="data" />
+    <VueTreant ref="vueTreant" :data="treeData" @on-node-expand="handleExpand" @on-node-activate="handleActivate" />
 </template>
 
 <style scoped>

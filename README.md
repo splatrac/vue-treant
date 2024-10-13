@@ -71,10 +71,10 @@ const treeData: Node[] = [{
 
 ### activated Event
 
-*   **Event Name:** `activated`
+*   **Event Name:** `on-node-activate`
 *   **Description:** Emitted when the node check control is toggled.
-*   **Payload:** None
-*   **Example:** Coming soon
+*   **Payload:** (nodeId, isActive)
+*   **Example:** @on-node-activate="handleNodeActivate" 
 
 ## Contribute
 
