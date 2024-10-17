@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<{
 })
 
 const active = ref(props.active)
-const emit = defineEmits(['activate'])
+const emit = defineEmits(['activate', 'activateContextMenu'])
 const activateNode = inject<ActivateNode>('activateNode')!
 </script>
 
@@ -28,7 +28,7 @@ const activateNode = inject<ActivateNode>('activateNode')!
             <input type="checkbox" v-model="active" @change="activateNode(props.id, active)" value="1">
             <span class="slider round"></span>
         </label>
-        <a class="context-menu node-control">
+        <a class="context-menu node-control" @click="$emit('activateContextMenu')">
             <IconMore class="menuIcon" />
         </a>
     </div>

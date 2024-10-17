@@ -3,6 +3,27 @@ import VueTreant from './components/TreeWrapper.vue'
 import { Node } from './types'
 
 
+const callback1 = () => {
+    alert('callback1')
+}
+
+const callback2 = () => {
+    alert('callback2')
+}
+
+const contextMenu1 = [
+    {
+        label: 'entry1',
+        icon: 'icon1',
+        action: callback1
+    },
+    {
+        label: 'entry2',
+        icon: 'icon2',
+        action: callback2
+    }
+]
+
 const treeData: Node[] = [{
     title: 'Root',
     id: 'root',
@@ -11,7 +32,7 @@ const treeData: Node[] = [{
             title: 'Node 1',
             id: 'node_1',
             children: [
-                { title: 'Node 1.1', id: 'node_1_1' },
+                { title: 'Node 1.1', id: 'node_1_1', context: contextMenu1 },
                 { title: 'Node 1.2', id: 'node_1_2', children: [{ title: 'Node 1.2.1', id: 'node_1_2_1' }] },
             ]
         },
@@ -42,7 +63,8 @@ const handleActivate = (id: string, isActive: boolean) => {
 
 <template>
     <h1>Vue Treant</h1>
-    <VueTreant ref="vueTreant" :data="treeData" @on-node-expand="handleExpand" @on-node-activate="handleActivate" />
+    <VueTreant ref="vueTreant" :data="treeData" @on-node-expand="handleExpand" @on-node-activate="handleActivate"
+        :contextMenu="contextMenu1" />
 </template>
 
 <style scoped>
