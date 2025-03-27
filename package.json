@@ -1,0 +1,39 @@
+{
+  "name": "vue-treant",
+  "version": "0.4.6",
+  "description": "A Vue entity tree module",
+  "author": "Splatrac",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/splatrac/vue-treant.git"
+  },
+  "main": "dist/vue-treant.cjs.js",
+  "module": "./dist/vue-treant.umd.cjs",
+  "browser": {
+    "./sfc": "src/components/Tree.vue"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "files": [
+    "dist",
+    "src/components/"
+  ],
+  "dependencies": {
+    "oh-vue-icons": "^1.0.0-rc3",
+    "vue": "^3.4.21",
+    "vue-uuid": "^3.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.9.1",
+    "vue-tsc": "^2.0.6"
+  }
+}

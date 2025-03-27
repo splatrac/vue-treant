@@ -1,0 +1,32 @@
+{
+    "nodes": [{
+      "title": "Probability of coralligenous habitat in the Mediterranean (MEDISEH)",
+      "code": "mediseh_cora",
+      "menu": "menu1",
+      "link": "http://gis.ices.dk/geonetwork/srv/eng/catalog.search#/metadata/4da88de5-b0b8-4de4-8aac-99a9b0980736"
+      "children": [
+          {
+              "title": "Probability of maerl habitat in the Mediterranean (MEDISEH)",
+              "code": "mediseh_maerl",
+              "menu": "",
+              "link": "http://gis.ices.dk/geonetwork/srv/eng/catalog.search#/metadata/43c7ac30-04da-479d-b5c1-ba621f0981e4"
+          },{
+              "title": "Probability of Posidonia oceanica in the Mediterranean (MEDISEH)",
+              "code": "mediseh_posidonia",
+              "menu": "",
+              "link": "http://gis.ices.dk/geonetwork/srv/eng/catalog.search#/metadata/a93cffc8-8f45-47a4-a9bd-c8ffd9ad53fb",
+              "children": [
+                  {
+                      "title": "Seagrass Meadows",
+                      "code": "greek_seagrass_meadows_v0906_espg3035",
+                      "menu": "menu1",
+                      "link": "https://www.seanoe.org/data/00765/87740/",
+                  },{
+                      "title": "Integrated Ecological Status",
+                      "code": "wfd_eco_status_",
+                      "menu": "menu1"
+                  }
+              ]
+          }
+    }]
+}
