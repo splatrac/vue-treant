@@ -16,14 +16,12 @@
 
 <script setup lang="ts">
 import { ref, inject, watch } from 'vue'
-// import { Node } from '../types'
 import { uuid } from 'vue-uuid'
 import IconMore from './icons/IconMore.vue';
 import { ActivateNode } from '../types';
 
-
 const activateTreeNode = inject<ActivateNode>('activateTreeNode', () => {
-  throw new Error('activateTreeNode injection failed')
+  // fallback noop
 })
 
 interface NodeProps {
@@ -39,7 +37,7 @@ const props = withDefaults(defineProps<NodeProps>(), {
 const active = ref(props.active)
 const emit = defineEmits(['activateContextMenu'])
 const activateNode = inject<ActivateNode>('activateNode', () => {
-  throw new Error('activateNode injection failed')
+  // fallback noop
 })
 
 const handleToggle = (event: Event) => {
@@ -48,15 +46,12 @@ const handleToggle = (event: Event) => {
 }
 
 watch(() => props.active, (newValue) => {
-  // The props.active changes only on the children
   if (newValue !== active.value) {
     active.value = newValue
   }
-
 }, { immediate: true })
 
 watch(active, (newValue) => {
-  // When this changes alone, it means the node is a parent node
   if (newValue !== props.active) {
     activateNode(props.id, newValue)
   }

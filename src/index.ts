@@ -1,4 +1,5 @@
 import VueTreant from "@/components/TreeWrapper.vue";
 
-export default VueTreant
-import "./style.css"
+export default VueTreant;
+export * from "./types";
+import "./style.css";

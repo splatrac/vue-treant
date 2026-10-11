@@ -1,3 +1,9 @@
+export interface ContextMenuItem {
+  label: string;
+  icon?: string;
+  action: () => void;
+}
+
 export interface Node {
   title: string;
   id?: string;
@@ -5,7 +11,8 @@ export interface Node {
   expanded?: boolean;
   active?: boolean;
   context?: any;
+  [key: string]: any;
 }
 
-export type ExpandNode = (_id?: string) => void;
+export type ExpandNode = (id?: string) => void;
 export type ActivateNode = (id: string, active: boolean) => void;

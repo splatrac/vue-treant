@@ -1,49 +1,49 @@
 <template>
   <div id="treemain">
-    <Tree :data="treeNodes" @on-node-activate="activateNode" @on-node-expand="expandNode" />
-    <!-- <ContextMenu :isVisible="true" :menuItems="contextMenu"></ContextMenu> -->
+    <Tree :data="treeNodes" @on-node-activate="onNodeActivate" @on-node-expand="onNodeExpand" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, provide, ref } from 'vue';
-import Tree from './Tree.vue'; // Your recursive tree component
-// import ContextMenu from './ContextMenu.vue';
-import { addProperties, findNode } from '../helpers'; // Your utility function to add properties
+import { reactive, provide } from 'vue';
+import Tree from './Tree.vue';
+import { addProperties, findNode } from '../helpers';
+import { Node, ActivateNode, ExpandNode } from '../types';
 
 const props = defineProps<{
-  data: any[]
-  contextMenu: any[]
+  data?: Node[]
+  node?: Node[]
+  contextMenu?: any[]
 }>()
 
-const emit = defineEmits(['onNodeExpand', 'onNodeActivate'])
-const showMenu = ref(false)
+const emit = defineEmits(['onNodeExpand', 'onNodeActivate', 'node-expand', 'node-activate'])
 
-// Initialize tree nodes with properties
-const initializeNodes = (nodes: any[]) => {
+const inputData = props.data ?? props.node ?? []
+
+const initializeNodes = (nodes: Node[]) => {
   return nodes.map(addProperties);
 };
 
-const treeNodes = reactive(initializeNodes(props.data))
+const treeNodes = reactive(initializeNodes(inputData))
 
-// Event handlers
 const expandNode = (id: string) => {
   const node = findNode(id, treeNodes)
-
-  node.expanded = !node.expanded
-  emit('onNodeExpand', id, node.expanded)
-};
-
-const activateNode = (id: string, active: boolean) => {
-  emit('onNodeActivate', id, active)
-};
-
-const activateContextMenu = (active: boolean) => {
-  showMenu.value = active
+  if (node) {
+    node.expanded = !node.expanded
+    emit('onNodeExpand', id, node.expanded)
+    emit('node-expand', id, node.expanded)
+  }
 }
+
+const activateNode: ActivateNode = (id: string, active: boolean) => {
+  emit('onNodeActivate', id, active)
+  emit('node-activate', id, active)
+}
+
+const onNodeExpand = expandNode as ExpandNode
+const onNodeActivate = activateNode
 
 provide('activateTreeNode', activateNode)
 provide('expandNode', expandNode)
-provide('activateContextMenu', activateContextMenu)
 
 </script>

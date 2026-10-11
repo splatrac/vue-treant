@@ -10,24 +10,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ContextMenuItem } from '../types'
 
-type MenuEntryCallback = () => void
-
-const isVisible = ref(false)
-interface MenuItems {
-  label: string
-  icon?: string
-  action: MenuEntryCallback
-}
-
-const props = defineProps<{
-  menuItems: MenuItems[]
+interface Props {
+  menuItems: ContextMenuItem[]
   top: number
   left: number
   isVisible: boolean
-}>()
+}
 
+const props = defineProps<Props>()
 </script>
 
 <style></style>
