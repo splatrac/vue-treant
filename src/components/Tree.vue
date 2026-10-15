@@ -3,8 +3,8 @@
     <template v-for="node in props.data" :key="node.id">
       <li class="container">
         <TreeNode :id="node.id" :active="node.active">
-          <template #left-control v-if="node.children?.length">
-            <a @click.prevent="expandNode(node.id)" class="node-control fold-control" role="button" aria-label="Toggle expand">
+          <template #left-control>
+            <a v-if="node.children?.length" @click.prevent="expandNode(node.id)" class="node-control fold-control" role="button" aria-label="Toggle expand">
               <IconPlus v-show="!node.expanded" />
               <IconMinus v-show="node.expanded" />
             </a>

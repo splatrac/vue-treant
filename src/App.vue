@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import VueTreant from './components/TreeWrapper.vue'
 import { Node } from './types'
 import treantLogo from './assets/logo.png'
 
+const vueTreant = ref<InstanceType<typeof VueTreant>>()
 
 const callback1 = () => {
   alert('callback1')
@@ -25,7 +27,15 @@ const contextMenu1 = [
   }
 ]
 
-const treeData: Node[] = [{
+const addNewNode = () => {
+  const addNode = vueTreant.value?.addNode
+  if (addNode) {
+    // child-only add: attach the new node as a child of the root node
+    addNode('root', { title: 'New node' })
+  }
+}
+
+const treeData = ref<Node[]>([{
   title: 'Root',
   id: 'root',
   children: [
@@ -48,7 +58,7 @@ const treeData: Node[] = [{
   ]
 },
 { title: 'Other', id: 'other' }
-]
+])
 
 
 const handleExpand = (id: string, isExpanded: boolean) => {
@@ -60,13 +70,26 @@ const handleActivate = (id: string, isActive: boolean) => {
   // TODO: Goal is to print successfuly for every node
   console.debug(`Node '${id}' activated = ${isActive}`)
 }
+
+const handleNodeAdd = (newNode: Node, parentId: string | null) => {
+  const root = treeData.value.find((n) => n.id === (parentId ?? 'root'))
+  if (root) {
+    root.children = root.children ?? []
+    root.children.push(newNode)
+  }
+}
+
+const handleNodeDrag = (sourceId: string, targetId: string | null) => {
+  console.debug(`Node '${sourceId}' dragged to ${targetId ?? 'root'}`)
+}
 </script>
 
 <template>
   <h1>Vue Treant</h1>
+  <button @click="addNewNode" class="new-node-btn">New node</button>
   <img :src="treantLogo" class="logo" />
   <VueTreant id="tree" class="tree-wrapper" ref="vueTreant" :data="treeData" @on-node-expand="handleExpand"
-    @on-node-activate="handleActivate" :contextMenu="contextMenu1" />
+    @on-node-activate="handleActivate" @on-node-add="handleNodeAdd" :contextMenu="contextMenu1" />
 </template>
 
 <style scoped>
@@ -75,6 +98,13 @@ const handleActivate = (id: string, isActive: boolean) => {
   margin-left: auto;
   margin-right: auto;
 
+}
+
+.new-node-btn {
+  padding: 6px 12px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .logo {

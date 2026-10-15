@@ -27,4 +27,14 @@ function findNode(id: string, array: Node[]): Node | undefined {
   return undefined
 }
 
-export { addProperties, findNode }
+function createNode(title: string, parentId?: string): Node {
+  return {
+    title,
+    id: uuid.v4(),
+    active: false,
+    children: [],
+    parentId,
+  }
+}
+
+export { addProperties, findNode, createNode }

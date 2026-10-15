@@ -6,9 +6,10 @@
 
 <script setup lang="ts">
 import { reactive, provide } from 'vue';
+import { uuid } from 'vue-uuid'
 import Tree from './Tree.vue';
 import { addProperties, findNode } from '../helpers';
-import { Node, ActivateNode, ExpandNode } from '../types';
+import { Node, ActivateNode, AddNode, ExpandNode } from '../types';
 
 const props = defineProps<{
   data?: Node[]
@@ -16,7 +17,7 @@ const props = defineProps<{
   contextMenu?: any[]
 }>()
 
-const emit = defineEmits(['onNodeExpand', 'onNodeActivate', 'node-expand', 'node-activate'])
+const emit = defineEmits(['onNodeExpand', 'onNodeActivate', 'node-expand', 'node-activate', 'onNodeAdd', 'node-add'])
 
 const inputData = props.data ?? props.node ?? []
 
@@ -40,10 +41,37 @@ const activateNode: ActivateNode = (id: string, active: boolean) => {
   emit('node-activate', id, active)
 }
 
+// Child-only add: the new node is appended as a child of an existing node.
+// `parentId` must resolve to a node already in the tree; root-level adds are not supported.
+const addNode: AddNode = (parentId, node = {}) => {
+  const parent = findNode(parentId, treeNodes)
+  if (!parent) return
+
+  const newNode: Node = {
+    ...node,
+    title: node.title ?? 'New node',
+    id: node.id ?? uuid.v4(),
+    active: node.active ?? false,
+    children: node.children ?? [],
+    parentId,
+  }
+
+  parent.children = parent.children ?? []
+  parent.children.push(newNode)
+
+  emit('onNodeAdd', newNode, parentId)
+  emit('node-add', newNode, parentId)
+}
+
 const onNodeExpand = expandNode as ExpandNode
 const onNodeActivate = activateNode
 
 provide('activateTreeNode', activateNode)
 provide('expandNode', expandNode)
+provide('addNode', addNode)
+
+defineExpose({
+  addNode,
+})
 
 </script>
